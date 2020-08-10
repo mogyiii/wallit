@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WallIT.Shared.Enums
 {
-    public enum AccountType
+    public enum SubjectType
     {
         CreditCard,
         DebitCard,

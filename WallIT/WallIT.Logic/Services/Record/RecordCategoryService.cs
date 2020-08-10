@@ -21,13 +21,13 @@ namespace WallIT.Logic.Services
         /*public async Task<ActionResult> EditRecordCategory(RecordCategoryDTO recordcategory, int UserId)
         {
             var result = new ActionResult();
-            var query = new GetAccountByAccountAndUserId
+            var query = new GetSubjectBySubjectAndUserId
             {
-                AccountId = recordcategory.AccountId.Value,
+                SubjectId = recordcategory.SubjectId.Value,
                 UserId = UserId
             };
-            var account = await _mediator.Send(query);
-            if (account == null)
+            var Subject = await _mediator.Send(query);
+            if (Subject == null)
             {
                 result.Suceeded = false;
                 result.ErrorMessages.Add("You don't have the right to edit this!");

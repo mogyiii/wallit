@@ -27,12 +27,12 @@ namespace WallIT.Logic.Mediator.Handlers.CommandHandlers
             cancellationToken.ThrowIfCancellationRequested();
             _unitOfWork.BeginTransaction();
             var category = _session.Load<RecordCategoryEntity>(request.RecordTemplate.RecordCategoryId);
-            var account = _session.Load<AccountEntity>(request.RecordTemplate.AccountId);
+            var Subject = _session.Load<SubjectEntity>(request.RecordTemplate.SubjectId);
             using (var trans = _session.BeginTransaction())
             {
                 var record = new RecordTemplateEntity
                 {
-                    Account = account,
+                    Subject = Subject,
                     RecordCategory = category,
                     Amount = request.RecordTemplate.Amount,
                     Name = request.RecordTemplate.Name,

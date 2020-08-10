@@ -8,7 +8,7 @@ namespace WallIT.DataAccess.Entities
     {
         public virtual RecordCategoryEntity RecordCategory { get; set; }
 
-        public virtual AccountEntity Account { get; set; }
+        public virtual SubjectEntity Subject { get; set; }
 
         public virtual double Amount { get; set; }
 

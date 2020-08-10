@@ -10,21 +10,21 @@ using WallIT.Shared.DTOs;
 
 namespace WallIT.Logic.Services
 {
-    public class AccountService
+    public class SubjectService
     {
         private readonly IMediator _mediator;
 
-        public AccountService(IMediator mediator)
+        public SubjectService(IMediator mediator)
         {
             _mediator = mediator;
         }
-        public async Task<ActionResult> EditAccount(AccountDTO account,int AccountId, int UserId)
+        public async Task<ActionResult> EditSubject(SubjectDTO Subject,int SubjectId, int UserId)
         {
             var result = new ActionResult();
-            account.UserId = UserId;
-            var query = new GetAccountByAccountAndUserId
+            Subject.UserId = UserId;
+            var query = new GetSubjectBySubjectAndUserId
             {
-                AccountId = AccountId,
+                SubjectId = SubjectId,
                 UserId = UserId
             };
             var QueryResult = await _mediator.Send(query);
@@ -36,9 +36,9 @@ namespace WallIT.Logic.Services
             }
             else
             {
-                var command = new EditAccountCommand
+                var command = new EditSubjectCommand
                 {
-                    account = account
+                    Subject = Subject
                 };
                 var CommandResult = await _mediator.Send(command);
                 if (CommandResult.Suceeded)
@@ -53,12 +53,12 @@ namespace WallIT.Logic.Services
             }
                 return result;
         }
-        public async Task<ActionResult> DeleteAccount(int AccountId, int UserId)
+        public async Task<ActionResult> DeleteSubject(int SubjectId, int UserId)
         {
             var result = new ActionResult();
-            var query = new GetAccountByAccountAndUserId
+            var query = new GetSubjectBySubjectAndUserId
             {
-                AccountId = AccountId,
+                SubjectId = SubjectId,
                 UserId = UserId
             };
             var QueryResult = await _mediator.Send(query);
@@ -70,7 +70,7 @@ namespace WallIT.Logic.Services
             }
             else
             {
-                var command = new DeleteAccountCommand
+                var command = new DeleteSubjectCommand
                 {
                     Id = QueryResult.Id
                 };

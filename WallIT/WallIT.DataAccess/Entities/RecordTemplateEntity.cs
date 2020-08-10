@@ -1,4 +1,5 @@
 ﻿using WallIT.DataAccess.Entities.Base;
+using WallIT.Shared.Enums;
 
 namespace WallIT.DataAccess.Entities
 {
@@ -6,7 +7,8 @@ namespace WallIT.DataAccess.Entities
     {
         public virtual string Name { get; set; }
         public virtual RecordCategoryEntity RecordCategory { get; set; }
-        public virtual AccountEntity Account { get; set; }
+        public virtual SubjectEntity Subject { get; set; }
         public virtual double Amount { get; set; }
+        public virtual Currency Currency { get; set; }
     }
 }

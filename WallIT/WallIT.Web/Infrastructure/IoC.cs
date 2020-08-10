@@ -48,7 +48,7 @@ namespace WallIT.Web.Infrastructure
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IUserClaimManager, UserClaimManager>();
             services.AddScoped<IRecordManager, RecordManager>();
-            services.AddScoped<IAccountManager, AccountManager>();
+            services.AddScoped<ISubjectManager, SubjectManager>();
             services.AddScoped<IRecordCategoryManager, RecordCategoryManager>();
             services.AddScoped<IRecordTemplateManager, RecordTemplateManager>();
             // Repositories
@@ -56,7 +56,7 @@ namespace WallIT.Web.Infrastructure
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserClaimRepository, UserClaimRepository>();
             services.AddScoped<IRecordRepository, RecordRepository>();
-            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<ISubjectRepository, SubjectRepository>();
             services.AddScoped<IRecordCategoryRepository, RecordCategoryRepository>();
             services.AddScoped<IRecordTemplateRepository, RecordTemplateRepository>();
         }
@@ -67,7 +67,7 @@ namespace WallIT.Web.Infrastructure
             services.AddTransient<IValidator<UserDTO>, UserDTOValidator>();
             services.AddTransient<IValidator<LoginModel>, LoginModelValidator>();
             services.AddTransient<IValidator<RegisterModel>, RegisterModelValidator>();
-            services.AddTransient<IValidator<AccountDTO>, AccountDTOValidator>();
+            services.AddTransient<IValidator<SubjectDTO>, SubjectDTOValidator>();
         }
     }
 }

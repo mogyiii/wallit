@@ -75,8 +75,8 @@ namespace WallIT.Web
             {
                 opt.Cookie.HttpOnly = true;
                 opt.ExpireTimeSpan = TimeSpan.FromDays(365);
-                opt.LoginPath = "/Account/Login";
-                opt.LogoutPath = "/Account/Logout";
+                opt.LoginPath = "/Subject/Login";
+                opt.LogoutPath = "/Subject/Logout";
                 opt.AccessDeniedPath = "/Home/AccessDenied";
                 opt.ReturnUrlParameter = "returnUrl";
             });
@@ -123,7 +123,7 @@ namespace WallIT.Web
             services.AddMediatR(typeof(GetUserByIdQueryHandler)); // handlers are stored in the WallIT.Logic assembly
 
             services.AddAutoMapper(cfg => SetupAutoMapperConfiguration(cfg), GetAutoMapperProfileAssemblies());
-            services.AddScoped<AccountService>();
+            services.AddScoped<SubjectService>();
             services.AddScoped<RecordService>();
             services.AddScoped<RecordCategoryService>();
             services.AddScoped<RecordTemplateService>();

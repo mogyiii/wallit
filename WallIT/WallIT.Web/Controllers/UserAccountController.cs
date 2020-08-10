@@ -8,12 +8,12 @@ using WallIT.Web.Models;
 
 namespace WallIT.Web.Controllers
 {
-    public class UserAccountController : ControllerBase
+    public class UserSubjectController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IStringLocalizer<UserAccountController> _localizer;
+        private readonly IStringLocalizer<UserSubjectController> _localizer;
 
-        public UserAccountController(IMediator mediator, IStringLocalizer<UserAccountController> localizer)
+        public UserSubjectController(IMediator mediator, IStringLocalizer<UserSubjectController> localizer)
         {
             _mediator = mediator;
             _localizer = localizer;

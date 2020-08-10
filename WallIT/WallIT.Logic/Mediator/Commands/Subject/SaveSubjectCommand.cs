@@ -7,8 +7,8 @@ using WallIT.Shared.DTOs;
 
 namespace WallIT.Logic.Mediator.Commands
 {
-    public class SaveAccountCommand : IRequest<ActionResult>
+    public class SaveSubjectCommand : IRequest<ActionResult>
     {
-        public AccountDTO account { get; set; }
+        public SubjectDTO Subject { get; set; }
     }
 }

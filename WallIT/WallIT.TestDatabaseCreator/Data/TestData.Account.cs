@@ -5,29 +5,29 @@ namespace WallIT.TestDatabaseCreator.Data
 {
     internal static partial class TestData
     {
-        internal static void CreateAccounts()
+        internal static void CreateSubjects()
         {
             var user1 = session.Load<UserEntity>(1);
 
-            var account1 = new AccountEntity
+            var Subject1 = new SubjectEntity
             {
-                Name = "Credit Card Account",
+                Name = "Credit Card Subject",
                 Balance = 20000,
-                AccountType = AccountType.CreditCard,
+                SubjectType = SubjectType.CreditCard,
                 Currency = Currency.HUF,
                 User = user1
             };
-            InsertEntity(account1);
+            InsertEntity(Subject1);
 
-            var account2 = new AccountEntity
+            var Subject2 = new SubjectEntity
             {
-                Name = "Credit Card Account",
+                Name = "Credit Card Subject",
                 Balance = 3450,
-                AccountType = AccountType.Cash,
+                SubjectType = SubjectType.Cash,
                 Currency = Currency.HUF,
                 User = user1
             };
-            InsertEntity(account2);
+            InsertEntity(Subject2);
         }
     }
 }

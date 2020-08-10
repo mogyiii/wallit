@@ -8,8 +8,8 @@ using WallIT.Shared.Interfaces.Repositories;
 
 namespace WallIT.Logic.Interfaces.Repositories
 {
-    public interface IAccountRepository : IRepository<AccountEntity, AccountDTO>
+    public interface ISubjectRepository : IRepository<SubjectEntity, SubjectDTO>
     {
-        AccountDTO GetAccountByAccountAndUserId(int accountId, int UserId);
+        SubjectDTO GetSubjectBySubjectAndUserId(int subjectId, int UserId);
     }
 }

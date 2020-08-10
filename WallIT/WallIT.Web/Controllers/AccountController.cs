@@ -14,17 +14,17 @@ using WallIT.Shared.DTOs;
 
 namespace WallIT.Web.Controllers
 {
-    public class AccountController : ControllerBase
+    public class SubjectController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IStringLocalizer<AccountController> _localizer;
+        private readonly IStringLocalizer<SubjectController> _localizer;
         private readonly UserManager<AppIdentityUser> _userManager;
-        private readonly AccountService _editAccountService; 
-        public AccountController(IMediator mediator, UserManager<AppIdentityUser> userManager, AccountService editAccountService, IStringLocalizer<AccountController> localizer)
+        private readonly SubjectService _editSubjectService; 
+        public SubjectController(IMediator mediator, UserManager<AppIdentityUser> userManager, SubjectService editSubjectService, IStringLocalizer<SubjectController> localizer)
         {
             _mediator = mediator;
             _userManager = userManager;
-            _editAccountService = editAccountService;
+            _editSubjectService = editSubjectService;
             _localizer = localizer;
         }
 
@@ -35,19 +35,19 @@ namespace WallIT.Web.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var query = new GetAccountByIdQuery { Id = id };
-            var account = await _mediator.Send(query);
+            var query = new GetSubjectByIdQuery { Id = id };
+            var Subject = await _mediator.Send(query);
 
-            return View(account);
+            return View(Subject);
         }
         public async Task<IActionResult> List() 
         {
-            var query = new GetAccountListQuery();
-            var account = await _mediator.Send(query);
-            return Json(account);
+            var query = new GetSubjectListQuery();
+            var Subject = await _mediator.Send(query);
+            return Json(Subject);
         }
         [Authorize]
-        public async Task<IActionResult> SaveAccount(AccountDTO model) 
+        public async Task<IActionResult> SaveSubject(SubjectDTO model) 
         {
             if (!ModelState.IsValid)
             {
@@ -55,9 +55,9 @@ namespace WallIT.Web.Controllers
             }
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
             model.UserId = user.Id;
-            var command = new SaveAccountCommand
+            var command = new SaveSubjectCommand
             {
-                account = model
+                Subject = model
             };
             var CommandResult = await _mediator.Send(command);
             if (!CommandResult.Suceeded)
@@ -70,20 +70,20 @@ namespace WallIT.Web.Controllers
             return Json(true);
         }
         [Authorize]
-        public async Task<IActionResult> EditAccount(AccountDTO model)
+        public async Task<IActionResult> EditSubject(SubjectDTO model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-            return Json(_editAccountService.EditAccount(model, model.Id, user.Id));
+            return Json(_editSubjectService.EditSubject(model, model.Id, user.Id));
         }
         [Authorize]
-        public async Task<IActionResult> DeleteAccount(int id)
+        public async Task<IActionResult> DeleteSubject(int id)
         {
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-            return Json(_deleteAccountService.DeleteAccount(id, user.Id));
+            return Json(_deleteSubjectService.DeleteSubject(id, user.Id));
         }
     }
 }

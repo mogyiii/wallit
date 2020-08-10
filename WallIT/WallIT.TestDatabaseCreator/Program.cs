@@ -81,7 +81,7 @@ namespace WallIT.TestDataBaseCreator
 
                 TestData.CreateCreditCards();
                 TestData.CreateUsers();
-                TestData.CreateAccounts();
+                TestData.CreateSubjects();
 
                 trans.Commit();
             }

@@ -4,6 +4,6 @@ using WallIT.Shared.Interfaces.Managers;
 
 namespace WallIT.Logic.Interfaces.Managers
 {
-    public interface IAccountManager : IManager<AccountEntity, AccountDTO>
+    public interface ISubjectManager : IManager<SubjectEntity, SubjectDTO>
     {}
 }

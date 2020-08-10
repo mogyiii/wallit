@@ -52,7 +52,7 @@ namespace WallIT.Logic.Mediator.Handlers.CommandHandlers
                 var loginResult = new ActionResult { Suceeded = false };
 
                 if (result.IsLockedOut)
-                    loginResult.ErrorMessages.Add("Your account is locked out!");
+                    loginResult.ErrorMessages.Add("Your Subject is locked out!");
                 else
                     loginResult.ErrorMessages.Add("E-mail or password is incorrect!");
 

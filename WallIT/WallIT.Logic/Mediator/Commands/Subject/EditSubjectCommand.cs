@@ -4,8 +4,8 @@ using WallIT.Shared.DTOs;
 
 namespace WallIT.Logic.Mediator.Commands
 {
-    public class EditAccountCommand : IRequest<ActionResult>
+    public class EditSubjectCommand : IRequest<ActionResult>
     {
-        public AccountDTO account { get; set; }
+        public SubjectDTO Subject { get; set; }
     }
 }

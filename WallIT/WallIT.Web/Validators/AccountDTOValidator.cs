@@ -7,9 +7,9 @@ using WallIT.Shared.DTOs;
 
 namespace WallIT.Web.Validators
 {
-    public class AccountDTOValidator : AbstractValidator<AccountDTO>
+    public class SubjectDTOValidator : AbstractValidator<SubjectDTO>
     {
-        public AccountDTOValidator()
+        public SubjectDTOValidator()
         {
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("Name is required!");
@@ -23,8 +23,8 @@ namespace WallIT.Web.Validators
                 });
             RuleFor(x => x.Currency)
                 .NotEmpty().WithMessage("Currency is required!");
-            RuleFor(x => x.AccountType)
-                .NotEmpty().WithMessage("AccountType is required!");
+            RuleFor(x => x.SubjectType)
+                .NotEmpty().WithMessage("SubjectType is required!");
         }
     }
 }

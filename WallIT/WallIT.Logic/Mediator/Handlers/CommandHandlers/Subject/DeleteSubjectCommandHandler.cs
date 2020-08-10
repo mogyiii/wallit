@@ -9,24 +9,24 @@ using WallIT.Shared.Interfaces.UnitOfWork;
 
 namespace WallIT.Logic.Mediator.Handlers.CommandHandlers
 {
-    public class DeleteAccountCommandHandler : IRequestHandler<DeleteAccountCommand, ActionResult>
+    public class DeleteSubjectCommandHandler : IRequestHandler<DeleteSubjectCommand, ActionResult>
     {
         private readonly IUnitOfWork _unitOfWork;
         internal static ISession _session;
-        public DeleteAccountCommandHandler(ISession session, IUnitOfWork unitOfWork)
+        public DeleteSubjectCommandHandler(ISession session, IUnitOfWork unitOfWork)
         {
             _session = session;
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<ActionResult> Handle(DeleteAccountCommand request, CancellationToken cancellationToken)
+        public async Task<ActionResult> Handle(DeleteSubjectCommand request, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
             _unitOfWork.BeginTransaction();
-            var account = _session.Load<AccountEntity>(request.Id);
+            var Subject = _session.Load<SubjectEntity>(request.Id);
             using (var trans = _session.BeginTransaction())
             {
-                _session.Delete(account);
+                _session.Delete(Subject);
                 trans.Commit();
             }
             return new ActionResult { Suceeded = true };

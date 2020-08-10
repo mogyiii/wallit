@@ -6,9 +6,9 @@ using WallIT.Shared.DTOs;
 
 namespace WallIT.Logic.Mediator.Queries
 {
-    public class GetAccountByAccountAndUserId : IRequest<AccountDTO>
+    public class GetSubjectBySubjectAndUserId : IRequest<SubjectDTO>
     {
         public int UserId { get; set; }
-        public int AccountId { get; set; }
+        public int SubjectId { get; set; }
     }
 }

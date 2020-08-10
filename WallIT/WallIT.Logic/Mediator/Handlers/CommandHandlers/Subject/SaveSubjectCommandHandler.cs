@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using NHibernate;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using WallIT.DataAccess.Entities;
@@ -12,33 +10,34 @@ using WallIT.Shared.Interfaces.UnitOfWork;
 
 namespace WallIT.Logic.Mediator.Handlers.CommandHandlers
 {
-    public class EditAccountCommandHandler : IRequestHandler<EditAccountCommand, ActionResult>
+    public class SaveSubjectCommandHandler : IRequestHandler<SaveSubjectCommand, ActionResult>
     {
         private readonly IUnitOfWork _unitOfWork;
         internal static ISession _session;
-        public EditAccountCommandHandler(ISession session, IUnitOfWork unitOfWork)
+        public SaveSubjectCommandHandler(ISession session, IUnitOfWork unitOfWork)
         {
             _session = session;
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<ActionResult> Handle(EditAccountCommand request, CancellationToken cancellationToken)
+        public async Task<ActionResult> Handle(SaveSubjectCommand request, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
             _unitOfWork.BeginTransaction();
-            var user = _session.Load<UserEntity>(request.account.UserId);
+
+            var user = _session.Load<UserEntity>(request.Subject.UserId);
             using (var trans = _session.BeginTransaction())
             {
-                var account = new AccountEntity
+                var Subject = new SubjectEntity
                 {
-                    Balance = request.account.Balance,
-                    AccountType = request.account.AccountType,
-                    Currency = request.account.Currency,
-                    Name = request.account.Name,
-                    ModificationDateUTC = DateTime.UtcNow,
+                    Balance = request.Subject.Balance,
+                    SubjectType = request.Subject.SubjectType,
+                    Currency = request.Subject.Currency,
+                    Name = request.Subject.Name,
+                    CreationDateUTC = DateTime.UtcNow,
                     User = user
                 };
-                _session.Update(account);
+                _session.Save(Subject);
                 trans.Commit();
             }
 

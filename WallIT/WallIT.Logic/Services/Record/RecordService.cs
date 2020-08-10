@@ -22,13 +22,13 @@ namespace WallIT.Logic.Services
         {
             var result = new ActionResult();
             
-            var query = new GetAccountByAccountAndUserId
+            var query = new GetSubjectBySubjectAndUserId
             {
-                 AccountId = record.AccountId.Value,
+                 SubjectId = record.SubjectId.Value,
                  UserId = UserId
             };
-            var account = await _mediator.Send(query);
-            if (account == null)
+            var Subject = await _mediator.Send(query);
+            if (Subject == null)
             {
                 result.Suceeded = false;
                 result.ErrorMessages.Add("You don't have the right to edit this!");
@@ -56,9 +56,9 @@ namespace WallIT.Logic.Services
         public async Task<ActionResult> DeleteRecord(RecordDTO record, int UserId)
         {
             var result = new ActionResult();
-            var query = new GetAccountByAccountAndUserId
+            var query = new GetSubjectBySubjectAndUserId
             {
-                AccountId = record.AccountId.Value,
+                SubjectId = record.SubjectId.Value,
                 UserId = UserId
             };
             var QueryResult = await _mediator.Send(query);

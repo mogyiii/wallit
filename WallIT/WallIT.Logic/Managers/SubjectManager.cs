@@ -8,9 +8,9 @@ using WallIT.Shared.Interfaces.UnitOfWork;
 
 namespace WallIT.Logic.Managers
 {
-    public class AccountManager : ManagerBase<AccountEntity, AccountDTO>, IAccountManager
+    public class SubjectManager : ManagerBase<SubjectEntity, SubjectDTO>, ISubjectManager
     {
-        public AccountManager(ISession session, IMapper mapper, IUnitOfWork unitOfWork) : base(session, mapper, unitOfWork)
+        public SubjectManager(ISession session, IMapper mapper, IUnitOfWork unitOfWork) : base(session, mapper, unitOfWork)
         { }
     }
 }
