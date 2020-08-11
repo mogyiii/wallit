@@ -50,7 +50,7 @@ namespace WallIT.Web.Infrastructure
             services.AddScoped<IRecordManager, RecordManager>();
             services.AddScoped<ISubjectManager, SubjectManager>();
             services.AddScoped<IRecordCategoryManager, RecordCategoryManager>();
-            services.AddScoped<IRecordTemplateManager, RecordTemplateManager>();
+            services.AddScoped<IRecordPlannedManager, RecordPlannedManager>();
             // Repositories
             services.AddScoped<ICreditCardRepository, CreditCardRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -58,7 +58,7 @@ namespace WallIT.Web.Infrastructure
             services.AddScoped<IRecordRepository, RecordRepository>();
             services.AddScoped<ISubjectRepository, SubjectRepository>();
             services.AddScoped<IRecordCategoryRepository, RecordCategoryRepository>();
-            services.AddScoped<IRecordTemplateRepository, RecordTemplateRepository>();
+            services.AddScoped<IRecordPlannedRepository, RecordPlannedRepository>();
         }
 
         private static void SetupTransient(IServiceCollection services)

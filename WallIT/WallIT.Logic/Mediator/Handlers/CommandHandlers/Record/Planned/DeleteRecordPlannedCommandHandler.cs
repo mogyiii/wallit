@@ -12,35 +12,26 @@ using WallIT.Shared.Interfaces.UnitOfWork;
 
 namespace WallIT.Logic.Mediator.Handlers.CommandHandlers
 {
-    public class SaveRecordCommandHandler : IRequestHandler<SaveRecordCommand, ActionResult>
+    public class DeleteRecordPlannedCommandHandler : IRequestHandler<DeleteRecordPlannedCommand, ActionResult>
     {
         private readonly IUnitOfWork _unitOfWork;
         internal static ISession _session;
-        public SaveRecordCommandHandler(ISession session, IUnitOfWork unitOfWork)
+        public DeleteRecordPlannedCommandHandler(ISession session, IUnitOfWork unitOfWork)
         {
             _session = session;
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<ActionResult> Handle(SaveRecordCommand request, CancellationToken cancellationToken)
+        public async Task<ActionResult> Handle(DeleteRecordPlannedCommand request, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
             _unitOfWork.BeginTransaction();
-            var category = _session.Load<RecordCategoryEntity>(request.record.RecordCategoryId);
+            var record = _session.Load<RecordPlannedEntity>(request.Id);
             using (var trans = _session.BeginTransaction())
             {
-                var record = new RecordEntity
-                {
-                    RecordCategory = category,
-                    Amount = request.record.Amount,
-                    Currency = request.record.Currency,
-                    CreationDateUTC = DateTime.UtcNow,
-                    TransactionDateUTC = DateTime.UtcNow
-                };
-                _session.Save(record);
+                _session.Delete(record);
                 trans.Commit();
             }
-
             return new ActionResult { Suceeded = true };
         }
     }

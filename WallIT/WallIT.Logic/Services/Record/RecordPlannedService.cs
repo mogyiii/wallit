@@ -10,21 +10,21 @@ using WallIT.Shared.DTOs;
 
 namespace WallIT.Logic.Services
 {
-    public class RecordTemplateService
+    public class RecordPlannedService
     {
         private readonly IMediator _mediator;
 
-        public RecordTemplateService(IMediator mediator)
+        public RecordPlannedService(IMediator mediator)
         {
             _mediator = mediator;
         }
-        public async Task<ActionResult> EditRecordTemplate(RecordTemplateDTO recordtemplate,int UserId)
+        public async Task<ActionResult> EditRecordPlanned(RecordPlannedDTO RecordPlanned,int UserId)
         {
             var result = new ActionResult();
 
             var query = new GetSubjectBySubjectAndUserId
             {
-                SubjectId = recordtemplate.SubjectId.Value,
+                SubjectId = RecordPlanned.RecordCategory.SubjectId.Value,
                 UserId = UserId
             };
             var Subject = await _mediator.Send(query);
@@ -36,9 +36,9 @@ namespace WallIT.Logic.Services
             }
             else
             {
-                var command = new EditRecordTemplateCommand
+                var command = new EditRecordPlannedCommand
                 {
-                    RecordTemplate = recordtemplate
+                    RecordPlanned = RecordPlanned
                 };
                 var CommandResult = await _mediator.Send(command);
                 if (CommandResult.Suceeded)
@@ -53,12 +53,12 @@ namespace WallIT.Logic.Services
             }
             return result;
         }
-        public async Task<ActionResult> DeleteRecordTemplate(RecordTemplateDTO recordtemplate, int UserId)
+        public async Task<ActionResult> DeleteRecordPlanned(RecordPlannedDTO RecordPlanned, int UserId)
         {
             var result = new ActionResult();
             var query = new GetSubjectBySubjectAndUserId
             {
-                SubjectId = recordtemplate.SubjectId.Value,
+                SubjectId = RecordPlanned.RecordCategory.SubjectId.Value,
                 UserId = UserId
             };
             var QueryResult = await _mediator.Send(query);
@@ -70,9 +70,9 @@ namespace WallIT.Logic.Services
             }
             else
             {
-                var command = new DeleteRecordTemplateCommand
+                var command = new DeleteRecordPlannedCommand
                 {
-                    Id = recordtemplate.Id
+                    Id = RecordPlanned.Id
                 };
                 var CommandResult = await _mediator.Send(command);
                 if (CommandResult.Suceeded)

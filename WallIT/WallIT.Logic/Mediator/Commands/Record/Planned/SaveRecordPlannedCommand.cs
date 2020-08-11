@@ -7,8 +7,8 @@ using WallIT.Shared.DTOs;
 
 namespace WallIT.Logic.Mediator.Commands
 {
-    public class EditRecordTemplateCommand : IRequest<ActionResult>
+    public class SaveRecordPlannedCommand : IRequest<ActionResult>
     {
-        public RecordTemplateDTO RecordTemplate { get; set; } 
+        public RecordPlannedDTO RecordPlanned { get; set; } 
     }
 }

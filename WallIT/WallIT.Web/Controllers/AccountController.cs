@@ -19,12 +19,12 @@ namespace WallIT.Web.Controllers
         private readonly IMediator _mediator;
         private readonly IStringLocalizer<SubjectController> _localizer;
         private readonly UserManager<AppIdentityUser> _userManager;
-        private readonly SubjectService _editSubjectService; 
-        public SubjectController(IMediator mediator, UserManager<AppIdentityUser> userManager, SubjectService editSubjectService, IStringLocalizer<SubjectController> localizer)
+        private readonly SubjectService _SubjectService; 
+        public SubjectController(IMediator mediator, UserManager<AppIdentityUser> userManager, SubjectService SubjectService, IStringLocalizer<SubjectController> localizer)
         {
             _mediator = mediator;
             _userManager = userManager;
-            _editSubjectService = editSubjectService;
+            _SubjectService = SubjectService;
             _localizer = localizer;
         }
 
@@ -77,13 +77,13 @@ namespace WallIT.Web.Controllers
                 return View(model);
             }
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-            return Json(_editSubjectService.EditSubject(model, model.Id, user.Id));
+            return Json(_SubjectService.EditSubject(model, model.Id, user.Id));
         }
         [Authorize]
         public async Task<IActionResult> DeleteSubject(int id)
         {
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-            return Json(_deleteSubjectService.DeleteSubject(id, user.Id));
+            return Json(_SubjectService.DeleteSubject(id, user.Id));
         }
     }
 }

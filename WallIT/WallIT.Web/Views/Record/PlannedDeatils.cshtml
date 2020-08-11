@@ -1,0 +1,54 @@
+﻿@model WallIT.Shared.DTOs.RecordPlannedDTO
+
+
+<div class="form-group">
+    <label asp-for="Name" class="control-label"></label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="RecordCategoryId" class="control-label"></label>
+    <input asp-for="RecordCategoryId" class="form-control" />
+    <span asp-validation-for="RecordCategoryId" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Amount" class="control-label"></label>
+    <input asp-for="Amount" class="form-control" />
+    <span asp-validation-for="Amount" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Currency" class="control-label"></label>
+    <input asp-for="Currency" class="form-control" />
+    <span asp-validation-for="Currency" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="DeadlineUTC" class="control-label"></label>
+    <input asp-for="DeadlineUTC" class="form-control" />
+    <span asp-validation-for="DeadlineUTC" class="text-danger"></span>
+</div>
+<div class="form-group form-check">
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="IsRepeat" /> @Html.DisplayNameFor(model => model.IsRepeat)
+    </label>
+</div>
+<div class="form-group form-check">
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="IsPaid" /> @Html.DisplayNameFor(model => model.IsPaid)
+    </label>
+</div>
+<div class="form-group">
+    <label asp-for="Id" class="control-label"></label>
+    <input asp-for="Id" class="form-control" />
+    <span asp-validation-for="Id" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="CreationDateUTC" class="control-label"></label>
+    <input asp-for="CreationDateUTC" class="form-control" />
+    <span asp-validation-for="CreationDateUTC" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="ModificationDateUTC" class="control-label"></label>
+    <input asp-for="ModificationDateUTC" class="form-control" />
+    <span asp-validation-for="ModificationDateUTC" class="text-danger"></span>
+</div>
+

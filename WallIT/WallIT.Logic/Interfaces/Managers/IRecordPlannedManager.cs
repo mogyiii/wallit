@@ -4,6 +4,6 @@ using WallIT.Shared.Interfaces.Managers;
 
 namespace WallIT.Logic.Interfaces.Managers
 {
-    public interface IRecordTemplateManager : IManager<RecordTemplateEntity, RecordTemplateDTO>
+    public interface IRecordPlannedManager : IManager<RecordPlannedEntity, RecordPlannedDTO>
     { }
 }

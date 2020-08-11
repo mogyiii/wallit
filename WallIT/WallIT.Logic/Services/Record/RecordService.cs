@@ -24,7 +24,7 @@ namespace WallIT.Logic.Services
             
             var query = new GetSubjectBySubjectAndUserId
             {
-                 SubjectId = record.SubjectId.Value,
+                 SubjectId = record.RecordCategory.SubjectId.Value,
                  UserId = UserId
             };
             var Subject = await _mediator.Send(query);
@@ -58,7 +58,7 @@ namespace WallIT.Logic.Services
             var result = new ActionResult();
             var query = new GetSubjectBySubjectAndUserId
             {
-                SubjectId = record.SubjectId.Value,
+                SubjectId = record.RecordCategory.SubjectId.Value,
                 UserId = UserId
             };
             var QueryResult = await _mediator.Send(query);

@@ -4,6 +4,6 @@ using WallIT.Shared.Interfaces.Repositories;
 
 namespace WallIT.Logic.Interfaces.Repositories
 {
-    public interface IRecordTemplateRepository : IRepository<RecordTemplateEntity, RecordTemplateDTO>
+    public interface IRecordPlannedRepository : IRepository<RecordPlannedEntity, RecordPlannedDTO>
     {}
 }

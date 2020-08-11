@@ -3,12 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using WallIT.Logic.DTOs;
-using WallIT.Shared.DTOs;
 
 namespace WallIT.Logic.Mediator.Commands
 {
-    public class SaveRecordTemplateCommand : IRequest<ActionResult>
+    public class DeleteRecordPlannedCommand : IRequest<ActionResult>
     {
-        public RecordTemplateDTO RecordTemplate { get; set; } 
+        public int Id { get; set; }
     }
 }

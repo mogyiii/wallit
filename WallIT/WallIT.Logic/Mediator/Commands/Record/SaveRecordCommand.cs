@@ -9,6 +9,6 @@ namespace WallIT.Logic.Mediator.Commands
 {
     public class SaveRecordCommand : IRequest<ActionResult>
     {
-        public RecordDTO record { get; set }
+        public RecordDTO record { get; set; }
     }
 }

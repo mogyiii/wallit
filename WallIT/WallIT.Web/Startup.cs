@@ -126,7 +126,7 @@ namespace WallIT.Web
             services.AddScoped<SubjectService>();
             services.AddScoped<RecordService>();
             services.AddScoped<RecordCategoryService>();
-            services.AddScoped<RecordTemplateService>();
+            services.AddScoped<RecordPlannedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

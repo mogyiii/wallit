@@ -39,10 +39,8 @@ namespace WallIT.Logic.Mapping
             //Record
             //CreateMap<RecordEntity, RecordDTO>().ReverseMap();
             CreateMap<RecordEntity, RecordDTO>()
-                .ForMember(dest => dest.SubjectId, m => m.MapFrom(src => src.Subject != null ? src.Subject.Id : (int?)null))
                 .ForMember(dest => dest.RecordCategoryId, m => m.MapFrom(src => src.RecordCategory != null ? src.RecordCategory.Id : (int?)null));
             CreateMap<RecordDTO, RecordEntity>()
-                .ForMember(dest => dest.Subject, m => m.MapFrom(src => src.SubjectId.HasValue ? new SubjectEntity { Id = src.SubjectId.Value } : null))
                 .ForMember(dest => dest.RecordCategory, m => m.MapFrom(src => src.RecordCategoryId.HasValue ? new RecordCategoryEntity { Id = src.RecordCategoryId.Value } : null));
 
             //Subject
@@ -61,12 +59,10 @@ namespace WallIT.Logic.Mapping
                 .ForMember(dest => dest.ParentCategory, m => m.MapFrom(src => src.ParentCategoryId.HasValue ? new UserEntity { Id = src.ParentCategoryId.Value } : null))
                 .ForMember(dest => dest.Subject, m => m.MapFrom(src => src.SubjectId.HasValue ? new SubjectEntity { Id = src.SubjectId.Value } : null));
 
-            //RecordTemplate
-            CreateMap<RecordTemplateEntity, RecordTemplateDTO>()
-                .ForMember(dest => dest.SubjectId, m => m.MapFrom(src => src.Subject != null ? src.Subject.Id : (int?)null))
+            //RecordPlanned
+            CreateMap<RecordPlannedEntity, RecordPlannedDTO>()
                 .ForMember(dest => dest.RecordCategoryId, m => m.MapFrom(src => src.RecordCategory != null ? src.RecordCategory.Id : (int?)null));
-            CreateMap<RecordTemplateDTO, RecordTemplateEntity>()
-                .ForMember(dest => dest.Subject, m => m.MapFrom(src => src.SubjectId.HasValue ? new SubjectEntity { Id = src.SubjectId.Value } : null))
+            CreateMap<RecordPlannedDTO, RecordPlannedEntity>()
                 .ForMember(dest => dest.RecordCategory, m => m.MapFrom(src => src.RecordCategoryId.HasValue ? new RecordCategoryEntity { Id = src.RecordCategoryId.Value } : null));
         }
     }

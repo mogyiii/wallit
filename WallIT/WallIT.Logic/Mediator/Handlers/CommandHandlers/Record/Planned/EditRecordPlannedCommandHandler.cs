@@ -12,30 +12,28 @@ using WallIT.Shared.Interfaces.UnitOfWork;
 
 namespace WallIT.Logic.Mediator.Handlers.CommandHandlers
 {
-    public class EditRecordTemplateCommandHandler : IRequestHandler<EditRecordTemplateCommand, ActionResult>
+    public class EditRecordPlannedCommandHandler : IRequestHandler<EditRecordPlannedCommand, ActionResult>
     {
         private readonly IUnitOfWork _unitOfWork;
         internal static ISession _session;
-        public EditRecordTemplateCommandHandler(ISession session, IUnitOfWork unitOfWork)
+        public EditRecordPlannedCommandHandler(ISession session, IUnitOfWork unitOfWork)
         {
             _session = session;
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<ActionResult> Handle(EditRecordTemplateCommand request, CancellationToken cancellationToken)
+        public async Task<ActionResult> Handle(EditRecordPlannedCommand request, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
             _unitOfWork.BeginTransaction();
-            var category = _session.Load<RecordCategoryEntity>(request.RecordTemplate.RecordCategoryId);
-            var Subject = _session.Load<SubjectEntity>(request.RecordTemplate.SubjectId);
+            var category = _session.Load<RecordCategoryEntity>(request.RecordPlanned.RecordCategoryId);
             using (var trans = _session.BeginTransaction())
             {
-                var record = new RecordTemplateEntity
+                var record = new RecordPlannedEntity
                 {
-                    Subject = Subject,
                     RecordCategory = category,
-                    Amount = request.RecordTemplate.Amount,
-                    Name = request.RecordTemplate.Name,
+                    Amount = request.RecordPlanned.Amount,
+                    Name = request.RecordPlanned.Name,
                     ModificationDateUTC = DateTime.UtcNow
                 };
                 _session.Update(record);
