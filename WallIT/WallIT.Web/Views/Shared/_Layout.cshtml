@@ -1,6 +1,8 @@
 ﻿@using WallIT.Logic.Identity
-@inject AppSignInManager SignInManager
+@using Microsoft.AspNetCore.Mvc.Localization
 
+@inject AppSignInManager SignInManager
+@inject IViewLocalizer Localizer
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,35 +22,84 @@
     </environment>
     <link rel="stylesheet" href="~/lib/wallit/scss/app/app.min.css" />
     <link rel="stylesheet" href="~/css/site.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/6096ca5492.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Web2</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <li>
-                                Hi, @User.Identity.Name
-                            </li>
-                        }
-                    </ul>
+
+    <div class="menu-container">
+        <div class="container">
+            <div class="row mt-5">
+                <div class="w-100 menu-row-content nobreak text-center menu-title">
+                    <!--Title-->
+                    <span class="p-0 font-weight-bold">
+                        @Localizer["Left Menu"]
+                    </span>
                 </div>
+                <div class="tile-under-line"></div>
             </div>
-        </nav>
-    </header>
+            <div class="row mt-3">
+                <!--Rows-->
+                <a href="/List/List" class="w-100">
+                    <div class="row m-3">
+                        <div class="col-2">
+                            <span class="menu-icon">
+                                <i class="fas fa-list"></i>
+                            </span>
+                        </div>
+                        <div class="col-9">
+                            <div class="menu-row-content nobreak">
+                                <span>
+                                    @Localizer["List"]
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-under-line"></div>
+                </a>
+            </div>
+            <div class="row mt-3">
+                <!--Rows-->
+                <a href="/List/List" class="w-100">
+                    <div class="row m-3">
+                        <div class="col-2">
+                            <span class="menu-icon">
+                                <i class="fas fa-list"></i>
+                            </span>
+                        </div>
+                        <div class="col-9">
+                            <div class="menu-row-content nobreak">
+                                <span>
+                                    @Localizer["List"]
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-under-line"></div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="header-menu">
+        <div class="row align-items-center">
+            <div class="col-2">
+                <button class="menu-btn m-2">
+                    <span class="h3">
+                        <i class="fas fa-bars"></i>
+                    </span>
+                </button>
+            </div>
+
+            <div class="col-3 text-lg-right">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <span class="p-2">
+
+                    </span>
+                }
+            </div>
+        </div>
+    </div>
     <div class="container">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
@@ -58,7 +109,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - Web2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020, - WallIT - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
         <partial name="_SelectLanguagePartial" />
     </footer>
@@ -82,7 +133,49 @@
         </script>
     </environment>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
+    <!--<script src="~/js/notify.min.js" asp-append-version="true"></script>-->
+    <script>
+        var menuisvisible = true;
+        function setUrlactive() {
+            var url = window.location.pathname;
+            for (var i = 0; i < $(".menu-row").length; i++) {
+                var getclass = $(".menu-row:eq(" + i + ")");
+                var href = getclass.attr("href");
+                if (href == url) {
+                    getclass.addClass("active");
+                }
+            }
+        }
+        function hidder() {
+            if (Cookies.get('hidden') == 'true') {
+                $('.footer').css('bottom', '-50px');
+                $('.footer-btn').css('transform', 'rotate(0deg)');
+            } else if (Cookies.get('hidden') == 'false') {
+                $('.footer').css('bottom', '0');
+                $('.footer-btn').css('transform', 'rotate(180deg)');
+            } else {
+                Cookies.set('hidden', 'false');
+                $('.footer-btn').css('transform', 'rotate(180deg)');
+            }
+        }
+        $(document).ready(function () {
+            setUrlactive();
+        });
+        $(".menu-btn").click(function () {
+            if (menuisvisible) {
+                $(".menu-container").css("margin-left", "-310px");
+                $(".header-menu").css("margin-left", "0px");
+                $(".header-menu").css("width", "100%");
+                menuisvisible = false;
+            } else {
+                $(".menu-container").css("margin-left", "0px");
+                $(".header-menu").css("margin-left", "300px");
+                $(".header-menu").css("width", "calc(100% - 300px)");
+                menuisvisible = true;
+            }
 
+        });
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
