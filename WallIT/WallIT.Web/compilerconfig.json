@@ -14,5 +14,9 @@
   {
     "outputFile": "wwwroot/lib/wallit/scss/app/app.css",
     "inputFile": "wwwroot/lib/wallit/scss/app/app.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/wallit/scss/app/menu.css",
+    "inputFile": "wwwroot/lib/wallit/scss/app/menu.scss"
   }
 ]

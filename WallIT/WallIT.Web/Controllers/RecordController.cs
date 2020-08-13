@@ -20,6 +20,15 @@ namespace WallIT.Web.Controllers
         {
             return View();
         }
+        public IActionResult RecordDetails()
+        {
+            return View();
+        }
+        public IActionResult RecordCategoryDetails()
+        {
+            return View();
+        }
+        [HttpGet("{id}")]
         public async Task<IActionResult> RecordDetails(int id)
         {
             var query = new GetRecordByIdQuery { Id = id };
@@ -27,6 +36,7 @@ namespace WallIT.Web.Controllers
 
             return View(result);
         }
+        [HttpGet("{id}")]
         public async Task<IActionResult> RecordCategoryDetails(int id)
         {
             var query = new GetRecordCategoryByIdQuery { Id = id };

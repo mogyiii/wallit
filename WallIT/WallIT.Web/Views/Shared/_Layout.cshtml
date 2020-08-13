@@ -21,36 +21,36 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
     <link rel="stylesheet" href="~/lib/wallit/scss/app/app.min.css" />
+    <link rel="stylesheet" href="~/lib/wallit/scss/app/menu.min.css" />
     <link rel="stylesheet" href="~/css/site.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/6096ca5492.js"></script>
 </head>
 <body>
-
     <div class="menu-container">
         <div class="container">
             <div class="row mt-5">
                 <div class="w-100 menu-row-content nobreak text-center menu-title">
                     <!--Title-->
                     <span class="p-0 font-weight-bold">
-                        @Localizer["Left Menu"]
+                        @Localizer["WallIT"]
                     </span>
                 </div>
                 <div class="tile-under-line"></div>
             </div>
             <div class="row mt-3">
                 <!--Rows-->
-                <a href="/List/List" class="w-100">
+                <a href="/Home/Statics" class="w-100  site-btn">
                     <div class="row m-3">
                         <div class="col-2">
                             <span class="menu-icon">
-                                <i class="fas fa-list"></i>
+                                <i class="fas fa-chart-pie"></i>
                             </span>
                         </div>
                         <div class="col-9">
                             <div class="menu-row-content nobreak">
                                 <span>
-                                    @Localizer["List"]
+                                    @Localizer["Statics"]
                                 </span>
                             </div>
                         </div>
@@ -60,17 +60,17 @@
             </div>
             <div class="row mt-3">
                 <!--Rows-->
-                <a href="/List/List" class="w-100">
+                <a href="/CreditCard/Details" class="w-100  site-btn">
                     <div class="row m-3">
                         <div class="col-2">
                             <span class="menu-icon">
-                                <i class="fas fa-list"></i>
+                                <i class="fas fa-credit-card"></i>
                             </span>
                         </div>
                         <div class="col-9">
                             <div class="menu-row-content nobreak">
                                 <span>
-                                    @Localizer["List"]
+                                    @Localizer["Credit Cards"]
                                 </span>
                             </div>
                         </div>
@@ -78,7 +78,93 @@
                     <div class="menu-under-line"></div>
                 </a>
             </div>
+            <div class="row mt-3">
+                <!--Rows-->
+                <a href="/Subject/SubjectDetails" class="w-100  site-btn">
+                    <div class="row m-3">
+                        <div class="col-2">
+                            <span class="menu-icon">
+                                <i class="far fa-address-book"></i>
+                            </span>
+                        </div>
+                        <div class="col-9">
+                            <div class="menu-row-content nobreak">
+                                <span>
+                                    @Localizer["Subjects"]
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-under-line"></div>
+                </a>
+            </div>
+            <div class="row mt-3">
+                <!--Rows-->
+                <a href="/Plans/RecordPlannedDetails" class="w-100  site-btn">
+                    <div class="row m-3">
+                        <div class="col-2">
+                            <span class="menu-icon">
+                                <i class="fas fa-ruler-combined"></i>
+                            </span>
+                        </div>
+                        <div class="col-9">
+                            <div class="menu-row-content nobreak">
+                                <span>
+                                    @Localizer["Plans"]
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-under-line"></div>
+                </a>
+            </div>
+            <div class="row mt-3">
+                <!--Rows-->
+                <a href="/Record/RecordDetails" class="w-100 site-btns">
+                    <div class="row m-3">
+                        <div class="col-2">
+                            <span class="menu-icon">
+                                <i class="far fa-clipboard"></i>
+                            </span>
+                        </div>
+                        <div class="col-9">
+                            <div class="menu-row-content nobreak">
+                                <span>
+                                    @Localizer["Records"]
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-under-line"></div>
+                </a>
+            </div>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <div class="row mt-3">
+                    <!--Rows-->
+                    <a href="/Home/Signout" class="w-100 site-btn">
+                        <div class="row m-3">
+                            <div class="col-2">
+                                <span class="menu-icon">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </span>
+                            </div>
+                            <div class="col-9">
+                                <div class="menu-row-content nobreak">
+                                    <span>
+                                        @Localizer["SignOut"]
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-under-line"></div>
+                    </a>
+                </div>
+            }
         </div>
+    </div>
+    <div class="logo">
+        Logo
     </div>
     <div class="header-menu">
         <div class="row align-items-center">
@@ -89,13 +175,20 @@
                     </span>
                 </button>
             </div>
-
-            <div class="col-3 text-lg-right">
+            <div class="col-10 text-lg-right">
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    <span class="p-2">
-
+                    <span class="mr-2">
+                        Signedin Name
                     </span>
+                }
+                else
+                {
+                    <a href="/UserAccount/Login" class="site-btn">
+                        <span class="mr-2">
+                            <i class="fas fa-user"></i> SignIn
+                        </span>
+                    </a>
                 }
             </div>
         </div>
@@ -109,9 +202,15 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020, - WallIT - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+                <div class="col-6">
+                    &copy; 2020, - WallIT - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+                <div class="col-6">
+                    <partial name="_SelectLanguagePartial" />
+                </div>
+            </div>
         </div>
-        <partial name="_SelectLanguagePartial" />
     </footer>
 
     <environment include="Development">
@@ -138,24 +237,14 @@
         var menuisvisible = true;
         function setUrlactive() {
             var url = window.location.pathname;
-            for (var i = 0; i < $(".menu-row").length; i++) {
-                var getclass = $(".menu-row:eq(" + i + ")");
+            for (var i = 0; i < $(".site-btn").length; i++) {
+                var getclass = $(".site-btn:eq(" + i + ")");
                 var href = getclass.attr("href");
                 if (href == url) {
-                    getclass.addClass("active");
+                    getclass.css("color", "white");
+                } else {
+                    getclass.css("color", "rgba(222, 237, 236, 1.00)");
                 }
-            }
-        }
-        function hidder() {
-            if (Cookies.get('hidden') == 'true') {
-                $('.footer').css('bottom', '-50px');
-                $('.footer-btn').css('transform', 'rotate(0deg)');
-            } else if (Cookies.get('hidden') == 'false') {
-                $('.footer').css('bottom', '0');
-                $('.footer-btn').css('transform', 'rotate(180deg)');
-            } else {
-                Cookies.set('hidden', 'false');
-                $('.footer-btn').css('transform', 'rotate(180deg)');
             }
         }
         $(document).ready(function () {
@@ -173,7 +262,9 @@
                 $(".header-menu").css("width", "calc(100% - 300px)");
                 menuisvisible = true;
             }
-
+        });
+        $(".site-btn").click(function () {
+            alert($(this).attr("href"));
         });
     </script>
     @RenderSection("Scripts", required: false)

@@ -4,67 +4,15 @@
 html, body {
     font-family: $font-family;
 }
-
-.menu-container {
+.logo{
     position: fixed;
-    min-height: 800px;
-    width: 300px;
-    z-index: 2;
-    background-image: $menu-bg-color;
-    overflow: hidden;
-    transition: .2s;
-    -webkit-box-shadow: 6px 7px 6px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 6px 7px 6px 0px rgba(0,0,0,0.75);
-    box-shadow: 6px 7px 6px 0px rgba(0,0,0,0.75);
-    transition-timing-function: ease-in-out;
-    font-size: 1.5em;
-    color: $text-color !important;
-
-    a {
-        text-decoration: none;
-        transition: .3s;
-        color: $text-color !important;
-
-        &:hover .menu-under-line {
-            width: 95%;
-        }
-    }
+    width: 100%;
+    text-align: center;
 }
-
-.menu-row-content {
-    overflow: hidden;
-}
-.header-menu {
-    width: calc(100% - 300px);
-    background-color: $menu-bd-color;
-    margin-left: 300px;
-    overflow: hidden;
-    transition: .2s;
-    transition-timing-function: ease-in-out;
-    z-index: 2;
-}
-.menu-icon {
-    font-size: 1.1em !important;
-}
-.menu-under-line { 
-    margin-top: -10px;
-    background-color: $under-line-color;
-    width: 70%;
-    height: 2px;
-    transition: .3s;
-}
-.tile-under-line {
-    @extend .menu-under-line;
-    margin: auto;
-    width: 40%;
-    height: 3px;
-}
-.menu-btn{
-    border: 0; 
+.site-btn{
+    text-decoration: none;
     color: $text-color;
-    background-color: rgba(255, 255, 255, 0.00)
-}
-.menu-title {
-    font-size: 1.8em !important;
-    overflow: hidden;
+    &hover{
+        color: $text-color;
+    }
 }
