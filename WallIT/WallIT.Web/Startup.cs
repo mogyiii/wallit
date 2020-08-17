@@ -75,8 +75,8 @@ namespace WallIT.Web
             {
                 opt.Cookie.HttpOnly = true;
                 opt.ExpireTimeSpan = TimeSpan.FromDays(365);
-                opt.LoginPath = "/Subject/Login";
-                opt.LogoutPath = "/Subject/Logout";
+                opt.LoginPath = "/UserAccount/Login";
+                opt.LogoutPath = "/UserAccount/Logout";
                 opt.AccessDeniedPath = "/Home/AccessDenied";
                 opt.ReturnUrlParameter = "returnUrl";
             });

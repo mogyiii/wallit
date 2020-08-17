@@ -22,6 +22,7 @@
     </environment>
     <link rel="stylesheet" href="~/lib/wallit/scss/app/app.min.css" />
     <link rel="stylesheet" href="~/lib/wallit/scss/app/menu.min.css" />
+    <link rel="stylesheet" href="~/lib/wallit/scss/app/form-styles.min.css" />
     <link rel="stylesheet" href="~/css/site.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/6096ca5492.js"></script>
@@ -60,7 +61,7 @@
             </div>
             <div class="row mt-3">
                 <!--Rows-->
-                <a href="/CreditCard/Details" class="w-100  site-btn">
+                <a href="/CreditCard/CreditCardDetails" class="w-100  site-btn">
                     <div class="row m-3">
                         <div class="col-2">
                             <span class="menu-icon">
@@ -142,7 +143,7 @@
             {
                 <div class="row mt-3">
                     <!--Rows-->
-                    <a href="/Home/Signout" class="w-100 site-btn">
+                    <a href="/UserAccount/Logout" class="w-100 site-btn">
                         <div class="row m-3">
                             <div class="col-2">
                                 <span class="menu-icon">
@@ -179,7 +180,7 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <span class="mr-2">
-                        Signedin Name
+                        Signedin, Name
                     </span>
                 }
                 else
@@ -195,7 +196,7 @@
     </div>
     <div class="container">
         <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3" id="main">
             @RenderBody()
         </main>
     </div>
@@ -262,9 +263,6 @@
                 $(".header-menu").css("width", "calc(100% - 300px)");
                 menuisvisible = true;
             }
-        });
-        $(".site-btn").click(function () {
-            alert($(this).attr("href"));
         });
     </script>
     @RenderSection("Scripts", required: false)

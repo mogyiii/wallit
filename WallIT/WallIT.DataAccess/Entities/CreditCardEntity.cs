@@ -7,5 +7,6 @@ namespace WallIT.DataAccess.Entities
     {
         [NotNull]
         public virtual string Name { get; set; }
+        public virtual UserEntity User { get; set; }
     }
 }

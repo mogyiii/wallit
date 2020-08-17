@@ -64,6 +64,11 @@ namespace WallIT.Logic.Mapping
                 .ForMember(dest => dest.RecordCategoryId, m => m.MapFrom(src => src.RecordCategory != null ? src.RecordCategory.Id : (int?)null));
             CreateMap<RecordPlannedDTO, RecordPlannedEntity>()
                 .ForMember(dest => dest.RecordCategory, m => m.MapFrom(src => src.RecordCategoryId.HasValue ? new RecordCategoryEntity { Id = src.RecordCategoryId.Value } : null));
+            //CreditCard 
+            CreateMap<CreditCardEntity, CreditCardDTO>()
+                .ForMember(dest => dest.UserId, m => m.MapFrom(src => src.User != null ? src.User.Id : (int?)null));
+            CreateMap<CreditCardDTO, CreditCardEntity>()
+                .ForMember(dest => dest.User, m => m.MapFrom(src => src.UserId.HasValue ? new UserEntity { Id = src.UserId.Value } : null));
         }
     }
 }

@@ -3,32 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WallIT.Logic.Identity;
 using WallIT.Logic.Mediator.Queries;
+using WallIT.Shared.DTOs;
 
 namespace WallIT.Web.Controllers
 {
     public class RecordController : Controller
     {
-        private readonly IMediator _mediator; 
-        public RecordController(IMediator mediator)
+        private readonly IMediator _mediator;
+        private readonly UserManager<AppIdentityUser> _userManager;
+        public RecordController(IMediator mediator, UserManager<AppIdentityUser> userManager)
         {
             _mediator = mediator;
+            _userManager = userManager;
         }
-
-        public IActionResult Index()
+        [Authorize]
+        public async Task<IActionResult> RecordDetails()//Test
         {
-            return View();
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            var SubjectQuery = new GetSubjectByUserIdQuery { UserId = user.Id };
+            var SubjectResult = await _mediator.Send(SubjectQuery);
+            return Json(SubjectResult);
+            //return View(recordDTO);
         }
-        public IActionResult RecordDetails()
-        {
-            return View();
-        }
+        [Authorize]
         public IActionResult RecordCategoryDetails()
         {
             return View();
         }
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> RecordDetails(int id)
         {
             var query = new GetRecordByIdQuery { Id = id };
@@ -37,6 +45,7 @@ namespace WallIT.Web.Controllers
             return View(result);
         }
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> RecordCategoryDetails(int id)
         {
             var query = new GetRecordCategoryByIdQuery { Id = id };

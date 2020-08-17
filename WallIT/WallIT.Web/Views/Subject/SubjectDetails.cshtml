@@ -1,49 +1,32 @@
 ﻿@model WallIT.Shared.DTOs.SubjectDTO
+@using WallIT.Shared.Enums;
 
-
-<div class="form-group">
-    <label asp-for="Name" class="control-label"></label>
-    <input asp-for="Name" class="form-control" />
-    <span asp-validation-for="Name" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Balance" class="control-label"></label>
-    <input asp-for="Balance" class="form-control" />
-    <span asp-validation-for="Balance" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="SubjectType" class="control-label"></label>
-    <input asp-for="SubjectType" class="form-control" />
-    <span asp-validation-for="SubjectType" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Currency" class="control-label"></label>
-    <input asp-for="Currency" class="form-control" />
-    <span asp-validation-for="Currency" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="UserId" class="control-label"></label>
-    <input asp-for="UserId" class="form-control" />
-    <span asp-validation-for="UserId" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="CreditCardId" class="control-label"></label>
-    <input asp-for="CreditCardId" class="form-control" />
-    <span asp-validation-for="CreditCardId" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Id" class="control-label"></label>
-    <input asp-for="Id" class="form-control" />
-    <span asp-validation-for="Id" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="CreationDateUTC" class="control-label"></label>
-    <input asp-for="CreationDateUTC" class="form-control" />
-    <span asp-validation-for="CreationDateUTC" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="ModificationDateUTC" class="control-label"></label>
-    <input asp-for="ModificationDateUTC" class="form-control" />
-    <span asp-validation-for="ModificationDateUTC" class="text-danger"></span>
-</div>
-
+<form method="POST" action="/Subject/SaveSubject" class="form-style">
+    <h1>Subject</h1>
+    <hr />
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Balance" class="control-label"></label>
+        <input asp-for="Balance" class="form-control" />
+        <span asp-validation-for="Balance" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SubjectType" class="control-label"></label>
+        <select asp-for="SubjectType" class="form-control" asp-items="Html.GetEnumSelectList<SubjectType>()">
+            <option selected="selected" value="">Please select</option>
+        </select>
+        <span asp-validation-for="SubjectType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Currency" class="control-label"></label>
+        <select asp-for="Currency" class="form-control" asp-items="Html.GetEnumSelectList<Currency>()">
+            <option selected="selected" value="">Please select</option>
+        </select>
+        <span asp-validation-for="Currency" class="text-danger"></span>
+    </div>
+    <button class="form-btn">Send</button>
+</form>

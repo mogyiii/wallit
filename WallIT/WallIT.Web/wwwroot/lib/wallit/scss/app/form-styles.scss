@@ -1,0 +1,31 @@
+﻿.form-style {
+    width: 450px;
+    text-align: center;
+    border: 1px solid rgba(68, 68, 68, 0.16);
+    -webkit-box-shadow: 7px 14px 15px -5px rgba(0,0,0,0.48);
+    -moz-box-shadow: 7px 14px 15px -5px rgba(0,0,0,0.48);
+    box-shadow: 7px 14px 15px -5px rgba(0,0,0,0.30);
+    margin: auto;
+    margin-top: 20px;
+    padding: 15px;
+}
+.form-group{
+    max-width: 150px;
+    margin: auto;
+    margin-top: 20px;
+}
+.form-btn {
+    margin: 15px;
+    width: 150px;
+    padding: 5px;
+    border: 1px solid rgba(180, 199, 202, 0.68);
+    transition: .2s;
+
+    &hover {
+        background-color: rgba(180, 199, 202, 1);
+        border: 1px solid rgba(180, 199, 202, 0.8);
+    }
+}
+.control-label {
+    font-weight: bold;
+}

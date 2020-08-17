@@ -3,6 +3,13 @@
     public enum Currency
     {
         HUF,
-        EUR
+        EUR,
+        USD,
+        RUB,
+        UAH,
+        BTC,
+        BCH,
+        XMR,
+        ETH
     }
 }

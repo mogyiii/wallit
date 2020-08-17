@@ -18,5 +18,9 @@
   {
     "outputFile": "wwwroot/lib/wallit/scss/app/menu.css",
     "inputFile": "wwwroot/lib/wallit/scss/app/menu.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/wallit/scss/app/form-styles.css",
+    "inputFile": "wwwroot/lib/wallit/scss/app/form-styles.scss"
   }
 ]

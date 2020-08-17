@@ -27,19 +27,21 @@ namespace WallIT.Web.Controllers
             _SubjectService = SubjectService;
             _localizer = localizer;
         }
-
-        public IActionResult Index()
+        [Authorize]
+        public IActionResult SubjectDetails()
         {
             return View();
         }
-
-        public async Task<IActionResult> Details(int id)
+        [Authorize]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> SubjectDetails(int id)
         {
             var query = new GetSubjectByIdQuery { Id = id };
             var Subject = await _mediator.Send(query);
 
             return View(Subject);
         }
+        [Authorize]
         public async Task<IActionResult> List() 
         {
             var query = new GetSubjectListQuery();
