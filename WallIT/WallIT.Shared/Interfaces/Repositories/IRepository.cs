@@ -13,5 +13,6 @@ namespace WallIT.Shared.Interfaces.Repositories
         TDTO[] Get(IEnumerable<int> ids);
 
         TDTO[] GetAll();
+        
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WallIT.Logic.Identity;
 using WallIT.Logic.Mediator.Commands;
+using WallIT.Logic.Mediator.Queries;
 using WallIT.Shared.DTOs;
 
 namespace WallIT.Web.Controllers
@@ -34,7 +35,11 @@ namespace WallIT.Web.Controllers
             if (!ModelState.IsValid)
                 return View(model);
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-            model.UserId = user.Id;
+            var query = new GetUserByIdQuery {
+                UserId = user.Id
+            };
+            var userDTO = await _mediator.Send(query);
+            model.User = userDTO;
             var command = new SaveCreditCardCommand 
             { 
                 CreditCard = model,
@@ -49,6 +54,17 @@ namespace WallIT.Web.Controllers
 
                 return Json(model);
             }
+        }
+        [Authorize]
+        public async Task<IActionResult> CreditCardList()
+        {
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            var query = new GetCreditCardListByUserIdQuery
+            {
+                UserId = user.Id
+            };
+            var result = await _mediator.Send(query);
+            return Json(result);
         }
     }
 }

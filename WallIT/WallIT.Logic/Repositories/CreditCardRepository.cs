@@ -10,5 +10,18 @@ namespace WallIT.Logic.Repositories
     {
         public CreditCardRepository(ISession session, IMapper mapper) : base(session, mapper)
         { }
+
+        public CreditCardDTO[] GetAllByUserId(int UserId)
+        {
+            var result = _session.QueryOver<CreditCardEntity>()
+                .Where(x => x.User.Id == UserId)
+                .List();
+
+            if (result == null)
+                return null;
+
+            var dto = _mapper.Map<CreditCardDTO[]>(result);
+            return dto;
+        }
     }
 }

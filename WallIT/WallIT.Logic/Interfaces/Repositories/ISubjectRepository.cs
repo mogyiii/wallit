@@ -11,5 +11,6 @@ namespace WallIT.Logic.Interfaces.Repositories
     public interface ISubjectRepository : IRepository<SubjectEntity, SubjectDTO>
     {
         SubjectDTO GetSubjectBySubjectAndUserId(int subjectId, int UserId);
+        SubjectDTO[] GetAllByUserId(int UserId);
     }
 }

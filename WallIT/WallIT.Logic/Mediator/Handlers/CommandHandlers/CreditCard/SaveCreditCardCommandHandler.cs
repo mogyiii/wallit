@@ -27,7 +27,7 @@ namespace WallIT.Logic.Mediator.Handlers.CommandHandlers
         {
             cancellationToken.ThrowIfCancellationRequested();
             _unitOfWork.BeginTransaction();
-            var user = _session.Load<UserEntity>(request.CreditCard.UserId);
+            var user = _session.Load<UserEntity>(request.CreditCard.User.Id);
             using (var trans = _session.BeginTransaction())
             {
                 var record = new CreditCardEntity

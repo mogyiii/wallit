@@ -1,9 +1,18 @@
-﻿@model WallIT.Shared.DTOs.SubjectDTO
+﻿@model WallIT.Shared.DTOs.SubjectDTO;
 @using WallIT.Shared.Enums;
+
+
 
 <form method="POST" action="/Subject/SaveSubject" class="form-style">
     <h1>Subject</h1>
     <hr />
+    <div class="form-group">
+        <label asp-for="CreditCard" class="control-label"></label>
+        <select id="CreditCards" class="form-control">
+            <option selected="selected" disabled="disabled" value="">Please select</option>
+        </select>
+    </div>
+    <input asp-for="CreditCardId" type="hidden" id="CreditCardId" class="form-control" />
     <div class="form-group">
         <label asp-for="Name" class="control-label"></label>
         <input asp-for="Name" class="form-control" />
@@ -30,3 +39,23 @@
     </div>
     <button class="form-btn">Send</button>
 </form>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: "Get",
+            url: "/CreditCard/CreditCardList",
+            success: function (data) {
+                for(i = 0; i < data.length; i++) {
+                    $("#CreditCards").append($("<option />").val(data[i].id).text(data[i].name));
+                }
+            },
+            error: function(data) {
+                console.error(data);
+            }
+        });
+    });
+    $("#CreditCards").change(function(){
+       $("#CreditCardId").val(this.value);
+    });
+</script>

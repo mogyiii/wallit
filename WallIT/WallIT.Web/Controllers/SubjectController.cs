@@ -42,9 +42,12 @@ namespace WallIT.Web.Controllers
             return View(Subject);
         }
         [Authorize]
-        public async Task<IActionResult> List() 
+        public async Task<IActionResult> SubjectList() 
         {
-            var query = new GetSubjectListQuery();
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            var query = new GetSubjectListByUserIdQuery { 
+                UserId = user.Id
+            };
             var Subject = await _mediator.Send(query);
             return Json(Subject);
         }
