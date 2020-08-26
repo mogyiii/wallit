@@ -15,7 +15,8 @@ namespace WallIT.Logic.Repositories
         public SubjectDTO[] GetAllByUserId(int UserId)
         {
             var result = _session.QueryOver<SubjectEntity>()
-                .Where(x => x.User.Id == UserId);
+                .Where(x => x.User.Id == UserId)
+                .List();
 
             if (result == null)
                 return null;

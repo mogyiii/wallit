@@ -27,21 +27,41 @@ namespace WallIT.Logic.Mediator.Handlers.CommandHandlers
         {
             cancellationToken.ThrowIfCancellationRequested();
             _unitOfWork.BeginTransaction();
-            var ParentCategory = _session.Load<RecordCategoryEntity>(request.RecordCategory.ParentCategoryId);
-            using (var trans = _session.BeginTransaction())
+            
+            if (request.RecordCategory.ParentCategoryId != null)
             {
+                RecordCategoryEntity ParentCategory = _session.Load<RecordCategoryEntity>(request.RecordCategory.ParentCategoryId);
+                using (var trans = _session.BeginTransaction())
+                {
+                    var record = new RecordCategoryEntity
+                    {
+                        Name = request.RecordCategory.Name,
+                        LastUsedUTC = DateTime.UtcNow,
+                        ParentCategory = ParentCategory,
+                        CreationDateUTC = DateTime.UtcNow
+                    };
+                    _session.Save(record);
+                    trans.Commit();
+                }
+            }
+            else
+            { 
+                using (var trans = _session.BeginTransaction())
+                {
                 var record = new RecordCategoryEntity
                 {
                     Name = request.RecordCategory.Name,
                     LastUsedUTC = DateTime.UtcNow,
-                    ParentCategory = ParentCategory,
                     CreationDateUTC = DateTime.UtcNow
                 };
                 _session.Save(record);
                 trans.Commit();
+                }
             }
 
             return new ActionResult { Suceeded = true };
+
         }
+            
     }
 }

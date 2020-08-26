@@ -26,6 +26,7 @@ namespace WallIT.Logic.Mediator.Handlers.CommandHandlers
             _unitOfWork.BeginTransaction();
 
             var user = _session.Load<UserEntity>(request.Subject.UserId);
+            var CreditCard = _session.Load<CreditCardEntity>(request.Subject.CreditCardId);
             using (var trans = _session.BeginTransaction())
             {
                 var Subject = new SubjectEntity
@@ -35,7 +36,8 @@ namespace WallIT.Logic.Mediator.Handlers.CommandHandlers
                     Currency = request.Subject.Currency,
                     Name = request.Subject.Name,
                     CreationDateUTC = DateTime.UtcNow,
-                    User = user
+                    User = user,
+                    CreditCard = CreditCard
                 };
                 _session.Save(Subject);
                 trans.Commit();

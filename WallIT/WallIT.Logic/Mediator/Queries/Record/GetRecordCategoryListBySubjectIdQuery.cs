@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using WallIT.Shared.DTOs;
 
-namespace WallIT.Logic.Mediator.Queries.Record
+namespace WallIT.Logic.Mediator.Queries
 {
     public class GetRecordCategoryListBySubjectIdQuery : IRequest<RecordCategoryDTO[]>
     {

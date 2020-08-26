@@ -10,5 +10,18 @@ namespace WallIT.Logic.Repositories
     {
         public RecordCategoryRepository(ISession session, IMapper mapper) : base(session, mapper)
         { }
+
+        public RecordCategoryDTO[] GetAllBySubjectId(int id)
+        {
+            var result = _session.QueryOver<RecordCategoryEntity>()
+                .Where(x => x.Subject.Id == id)
+                .List();
+
+            if (result == null)
+                return null;
+
+            var dto = _mapper.Map<RecordCategoryDTO[]>(result);
+            return dto;
+        }
     }
 }

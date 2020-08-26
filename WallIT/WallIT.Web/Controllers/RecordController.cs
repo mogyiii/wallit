@@ -6,9 +6,13 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using WallIT.Logic.Identity;
+using WallIT.Logic.Mediator.Commands;
 using WallIT.Logic.Mediator.Queries;
+using WallIT.Logic.Services;
 using WallIT.Shared.DTOs;
+using WallIT.Web.Models;
 
 namespace WallIT.Web.Controllers
 {
@@ -16,24 +20,73 @@ namespace WallIT.Web.Controllers
     {
         private readonly IMediator _mediator;
         private readonly UserManager<AppIdentityUser> _userManager;
-        public RecordController(IMediator mediator, UserManager<AppIdentityUser> userManager)
+        private readonly IStringLocalizer<SubjectController> _localizer;
+        private readonly RecordCategoryService _recordCategoryService;
+        public RecordController(IMediator mediator, UserManager<AppIdentityUser> userManager, IStringLocalizer<SubjectController> localizer, RecordCategoryService recordCategoryService)
         {
             _mediator = mediator;
             _userManager = userManager;
+            _localizer = localizer;
+            _recordCategoryService = recordCategoryService;
         }
         [Authorize]
-        public async Task<IActionResult> RecordDetails()//Test
+        public async Task<IActionResult> RecordCategoryDetails()
         {
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-            var SubjectQuery = new GetSubjectByUserIdQuery { UserId = user.Id };
+            var SubjectQuery = new GetSubjectListByUserIdQuery { UserId = user.Id };
             var SubjectResult = await _mediator.Send(SubjectQuery);
-            return Json(SubjectResult);
-            //return View(recordDTO);
+            RecordCategoryModel model = new RecordCategoryModel 
+            { 
+                subjectDTO = SubjectResult,
+                recordCategoryDTO = await _recordCategoryService.ConvertRecordCategoryListToRecordDTOAsync(SubjectResult)
+            };
+            //return Json(model);
+            return View(model);
         }
         [Authorize]
-        public IActionResult RecordCategoryDetails()
+        public async Task<IActionResult> RecordDetails()
         {
-            return View();
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            var SubjectQuery = new GetSubjectListByUserIdQuery { UserId = user.Id };
+            var SubjectResult = await _mediator.Send(SubjectQuery);
+            RecordModel model = new RecordModel
+            {
+                recordCategoryDTO = await _recordCategoryService.ConvertRecordCategoryListToRecordDTOAsync(SubjectResult)
+            };
+            return View(model);
+        }
+        [Authorize]
+        public async Task<IActionResult> SaveRecordCategory(RecordCategoryDTO model)
+        {
+            var command = new SaveRecordCategoryCommand{
+                RecordCategory = model
+            };
+            var result = await _mediator.Send(command);
+            if (!result.Suceeded)
+            {
+                foreach (var msg in result.ErrorMessages)
+                    ModelState.AddModelError("", _localizer[msg]);
+
+                return View(model);
+            }
+            return Json(true);
+        }
+        [Authorize]
+        public async Task<IActionResult> SaveRecord(RecordDTO model)
+        {
+            var command = new SaveRecordCommand
+            {
+                record = model
+            };
+            var result = await _mediator.Send(command);
+            if (!result.Suceeded)
+            {
+                foreach (var msg in result.ErrorMessages)
+                    ModelState.AddModelError("", _localizer[msg]);
+
+                return View(model);
+            }
+            return Json(true);
         }
         [HttpGet("{id}")]
         [Authorize]
@@ -54,4 +107,5 @@ namespace WallIT.Web.Controllers
             return View(result);
         }
     }
+    
 }

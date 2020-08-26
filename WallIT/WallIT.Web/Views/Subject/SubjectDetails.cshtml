@@ -1,44 +1,43 @@
-﻿@model WallIT.Shared.DTOs.SubjectDTO;
+﻿@model SaveSubjectModel;
 @using WallIT.Shared.Enums;
 
 
 
-<form method="POST" action="/Subject/SaveSubject" class="form-style">
-    <h1>Subject</h1>
-    <hr />
-    <div class="form-group">
-        <label asp-for="CreditCard" class="control-label"></label>
-        <select id="CreditCards" class="form-control">
-            <option selected="selected" disabled="disabled" value="">Please select</option>
-        </select>
-    </div>
-    <input asp-for="CreditCardId" type="hidden" id="CreditCardId" class="form-control" />
-    <div class="form-group">
-        <label asp-for="Name" class="control-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Balance" class="control-label"></label>
-        <input asp-for="Balance" class="form-control" />
-        <span asp-validation-for="Balance" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="SubjectType" class="control-label"></label>
-        <select asp-for="SubjectType" class="form-control" asp-items="Html.GetEnumSelectList<SubjectType>()">
-            <option selected="selected" value="">Please select</option>
-        </select>
-        <span asp-validation-for="SubjectType" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Currency" class="control-label"></label>
-        <select asp-for="Currency" class="form-control" asp-items="Html.GetEnumSelectList<Currency>()">
-            <option selected="selected" value="">Please select</option>
-        </select>
-        <span asp-validation-for="Currency" class="text-danger"></span>
-    </div>
-    <button class="form-btn">Send</button>
-</form>
+    <form method="POST" action="/Subject/SaveSubject" class="form-style">
+        <h1>Subject</h1>
+        <hr />
+        <div class="form-group">
+            <label asp-for="SelectCreditCard" class="control-label"></label>
+            <select asp-for="SelectCreditCard" id="CreditCards" class="form-control">
+                <option selected="selected" disabled="disabled" value="">Please select</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Balance" class="control-label"></label>
+            <input asp-for="Balance" class="form-control" />
+            <span asp-validation-for="Balance" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="SubjectType" class="control-label"></label>
+            <select asp-for="SubjectType" class="form-control" asp-items="Html.GetEnumSelectList<SubjectType>()">
+                <option selected="selected" value="">Please select</option>
+            </select>
+            <span asp-validation-for="SubjectType" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Currency" class="control-label"></label>
+            <select asp-for="Currency" class="form-control" asp-items="Html.GetEnumSelectList<Currency>()">
+                <option selected="selected" value="">Please select</option>
+            </select>
+            <span asp-validation-for="Currency" class="text-danger"></span>
+        </div>
+        <button class="form-btn">Send</button>
+    </form>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script>
     $(document).ready(function () {
@@ -55,7 +54,7 @@
             }
         });
     });
-    $("#CreditCards").change(function(){
+    /*$("#CreditCards").change(function(){
        $("#CreditCardId").val(this.value);
-    });
+    });*/
 </script>

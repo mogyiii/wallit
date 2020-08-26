@@ -11,6 +11,7 @@ using WallIT.Logic.Mediator.Commands;
 using WallIT.Logic.Mediator.Queries;
 using WallIT.Logic.Services;
 using WallIT.Shared.DTOs;
+using WallIT.Web.Models;
 
 namespace WallIT.Web.Controllers
 {
@@ -52,17 +53,27 @@ namespace WallIT.Web.Controllers
             return Json(Subject);
         }
         [Authorize]
-        public async Task<IActionResult> SaveSubject(SubjectDTO model) 
+        [HttpPost]
+        public async Task<IActionResult> SaveSubject(SaveSubjectModel model) 
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-            model.UserId = user.Id;
+            var SubjectDTO = new SubjectDTO
+            {
+                UserId = user.Id,
+                CreditCardId = model.SelectCreditCard,
+                Balance = model.Balance,
+                Currency = model.Currency,
+                Name = model.Name,
+                SubjectType = model.SubjectType
+            };
+            
             var command = new SaveSubjectCommand
             {
-                Subject = model
+                Subject = SubjectDTO
             };
             var CommandResult = await _mediator.Send(command);
             if (!CommandResult.Suceeded)

@@ -5,5 +5,7 @@ using WallIT.Shared.Interfaces.Repositories;
 namespace WallIT.Logic.Interfaces.Repositories
 {
     public interface IRecordCategoryRepository : IRepository<RecordCategoryEntity, RecordCategoryDTO>
-    {}
+    {
+        RecordCategoryDTO[] GetAllBySubjectId(int id);
+    }
 }

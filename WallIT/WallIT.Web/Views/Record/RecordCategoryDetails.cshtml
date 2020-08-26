@@ -1,20 +1,36 @@
-﻿@model WallIT.Shared.DTOs.RecordCategoryDTO
-<form method="POST" action="/Record/SaveRecordCategory" class="form-style">
-    <h1>Record Category</h1>
-    <hr />
-    <div class="form-group">
-        <label asp-for="Name" class="control-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ParentCategoryId" class="control-label"></label>
-        <input asp-for="ParentCategoryId" class="form-control" />
-        <span asp-validation-for="ParentCategoryId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="SubjectId" class="control-label"></label>
-        <input asp-for="SubjectId" class="form-control" />
-        <span asp-validation-for="SubjectId" class="text-danger"></span>
-    </div>
-</form>
+﻿@model WallIT.Web.Models.RecordCategoryModel
+
+    <form method="POST" action="/Record/SaveRecordCategory" class="form-style">
+        <h1>Create Record Category</h1>
+        <hr />
+        <div class="form-group">
+            <label asp-for="SubjectId" class="control-label">Parent Subject</label>
+            <select asp-for="SubjectId" id="CreditCards" class="form-control">
+                <option selected="selected" disabled="disabled" value="">Please select</option>
+                @for (var i = 0; i < Model.subjectDTO.Length; i++)
+                {
+                    <option value="@Model.subjectDTO[i].Id">@Model.subjectDTO[i].Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="recordCategoryId" class="control-label">Parent Record Category</label>
+            <select asp-for="recordCategoryId" id="CreditCards" class="form-control">
+                <option selected="selected" disabled="disabled" value="">Please select</option>
+                @for (var i = 0; i < Model.recordCategoryDTO.Length; i++)
+                {
+                    <option value="@Model.recordCategoryDTO[i].Id">@Model.recordCategoryDTO[i].Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <button class="form-btn">Send</button>
+    </form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

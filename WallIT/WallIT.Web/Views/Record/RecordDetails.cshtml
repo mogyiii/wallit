@@ -1,31 +1,41 @@
-﻿@model WallIT.Shared.DTOs.RecordDTO
+﻿@model RecordModel;
 @using WallIT.Shared.Enums;
-<form method="POST" action="/Record/SaveRecord" class="form-style">
-    <h1>Record</h1>
-    <hr />
-    <!--List Category-->
+    <form method="POST" action="/Record/SaveRecord" class="form-style">
+        <h1>Record</h1>
+        <hr />
+        <!--List Category-->
+        <div class="form-group">
+            <label asp-for="recordCategoryId" class="control-label">Parent Record Category</label>
+            <select asp-for="recordCategoryId" id="CreditCards" class="form-control">
+                <option selected="selected" disabled="disabled" value="">Please select</option>
+                @for (var i = 0; i < Model.recordCategoryDTO.Length; i++)
+                {
+                    <option value="@Model.recordCategoryDTO[i].Id">@Model.recordCategoryDTO[i].Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <i class="fas fa-coins"></i>
+            <label asp-for="Amount" class="control-label"></label>
+            <input asp-for="Amount" class="form-control" />
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+        <hr />
+        <div class="form-group">
+            <i class="fas fa-dollar-sign"></i>
+            <label asp-for="Currency" class="control-label"></label>
+            <select asp-for="Currency" class="form-control" asp-items="Html.GetEnumSelectList<Currency>()">
+                <option selected="selected" value="">Please select</option>
+            </select>
+            <span asp-validation-for="Currency" class="text-danger"></span>
+        </div>
+        <hr />
+        <div class="form-group">
+            <i class="far fa-calendar-alt"></i>
+            <label asp-for="TransactionDateUTC" class="control-label">Transaction Date</label>
+            <input asp-for="TransactionDateUTC" class="form-control" />
+            <span asp-validation-for="TransactionDateUTC" class="text-danger"></span>
+        </div>
+        <button class="form-btn">Send</button>
+    </form>
 
-    <div class="form-group">
-        <i class="fas fa-coins"></i>
-        <label asp-for="Amount" class="control-label"></label>
-        <input asp-for="Amount" class="form-control" />
-        <span asp-validation-for="Amount" class="text-danger"></span>
-    </div>
-    <hr />
-    <div class="form-group">
-        <i class="fas fa-dollar-sign"></i>
-        <label asp-for="Currency" class="control-label"></label>
-        <select asp-for="Currency" class="form-control" asp-items="Html.GetEnumSelectList<Currency>()">
-            <option selected="selected" value="">Please select</option>
-        </select>
-        <span asp-validation-for="Currency" class="text-danger"></span>
-    </div>
-    <hr />
-    <div class="form-group">
-        <i class="far fa-calendar-alt"></i>
-        <label asp-for="TransactionDateUTC" class="control-label">Transaction Date</label>
-        <input asp-for="TransactionDateUTC" class="form-control" />
-        <span asp-validation-for="TransactionDateUTC" class="text-danger"></span>
-    </div>
-    <button class="form-btn">Send</button>
-</form>
